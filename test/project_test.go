@@ -31,8 +31,8 @@ func TestGetName(t *testing.T) {
 func TestGetTasks(t *testing.T) {
 	projectName := entity.NewProjectName("test")
 	taskList := []entity.Task{
-		*entity.NewTask(1, "Test Task1", false),
-		*entity.NewTask(2, "Test Task2", false),
+		*entity.NewTask(*entity.NewTaskId(1), "Test Task1", false),
+		*entity.NewTask(*entity.NewTaskId(2), "Test Task2", false),
 	}
 	project := entity.NewProject(*projectName, taskList)
 

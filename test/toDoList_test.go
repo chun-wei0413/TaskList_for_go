@@ -7,19 +7,21 @@ import (
 
 func setUp() (toDoList *entity.ToDoList) {
 	taskList := []entity.Task{
-		*entity.NewTask(1, "Task 1", false),
-		*entity.NewTask(2, "Task 2", true),
+		*entity.NewTask(*entity.NewTaskId(1), "Task 1", false),
+		*entity.NewTask(*entity.NewTaskId(2), "Task 2", true),
 	}
 
 	projectName := entity.NewProjectName("Project 1")
-	toDoList = entity.NewToDoList()
+	id := *entity.NewToDoListId(1)
+	toDoList = entity.NewToDoList(id)
 	toDoList.AddProjects(*projectName, taskList)
 
 	return toDoList
 }
 
 func TestNewToDoList(t *testing.T) {
-	projects := entity.NewToDoList()
+	id := *entity.NewToDoListId(1)
+	projects := entity.NewToDoList(id)
 	if projects == nil {
 		t.Fatal("projects should not return nil")
 	}
@@ -32,6 +34,11 @@ func TestNewToDoList(t *testing.T) {
 
 func TestGetProject(t *testing.T) {
 	toDoList := setUp()
+
+	id := toDoList.GetToDoListId()
+	if id.GetId() != 1 {
+		t.Fatal("ToDoList ID should be 1, but got ", id.GetId())
+	}
 
 	projects := toDoList.GetProjects()
 
@@ -67,8 +74,8 @@ func TestAddProject(t *testing.T) {
 
 func TestGetTasksByProjectName(t *testing.T) {
 	taskList := []entity.Task{
-		*entity.NewTask(1, "Task 1", false),
-		*entity.NewTask(2, "Task 2", true),
+		*entity.NewTask(*entity.NewTaskId(1), "Task 1", false),
+		*entity.NewTask(*entity.NewTaskId(2), "Task 2", true),
 	}
 	targetProjectName := entity.NewProjectName("Project 1")
 	toDoList := setUp()
@@ -79,8 +86,10 @@ func TestGetTasksByProjectName(t *testing.T) {
 	}
 
 	for i, task := range tasks {
-		if task.GetId() != taskList[i].GetId() {
-			t.Errorf("Expected task ID %d, got %d", taskList[i].GetId(), task.GetId())
+		id := task.GetTaskId()
+		taskId := taskList[i].GetTaskId()
+		if id.GetId() != taskId.GetId() {
+			t.Errorf("Expected task ID %d, got %d", taskId.GetId(), id.GetId())
 		}
 	}
 }

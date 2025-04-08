@@ -1,5 +1,6 @@
 package entity
 
+// Entity
 type Project struct {
 	name  ProjectName
 	tasks []Task

@@ -1,12 +1,13 @@
 package entity
 
+// Entity
 type Task struct {
-	id          int64
+	id          TaskId
 	description string
 	done        bool
 }
 
-func NewTask(id int64, description string, done bool) *Task {
+func NewTask(id TaskId, description string, done bool) *Task {
 	return &Task{
 		id:          id,
 		description: description,
@@ -14,7 +15,7 @@ func NewTask(id int64, description string, done bool) *Task {
 	}
 }
 
-func (task *Task) GetId() int64 {
+func (task *Task) GetTaskId() TaskId {
 	return task.id
 }
 

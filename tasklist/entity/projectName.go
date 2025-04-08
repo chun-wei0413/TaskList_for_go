@@ -1,5 +1,6 @@
 package entity
 
+// ValueObject
 type ProjectName struct {
 	value string
 }

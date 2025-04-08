@@ -1,13 +1,20 @@
 package entity
 
+// AggregateRoot
 type ToDoList struct {
+	id       ToDoListId
 	projects []Project
 }
 
-func NewToDoList() *ToDoList {
+func NewToDoList(id ToDoListId) *ToDoList {
 	return &ToDoList{
+		id:       id,
 		projects: []Project{},
 	}
+}
+
+func (t *ToDoList) GetToDoListId() ToDoListId {
+	return t.id
 }
 
 func (t *ToDoList) GetProjects() []Project {

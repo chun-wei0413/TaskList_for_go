@@ -6,10 +6,11 @@ import (
 )
 
 func TestTask(t *testing.T) {
-	task := entity.NewTask(1, "Test Description", false)
+	task := entity.NewTask(*entity.NewTaskId(1), "Test Description", false)
 
-	if task.GetId() != 1 {
-		t.Error("Expected 1, got ", task.GetId())
+	id := task.GetTaskId()
+	if id.GetId() != 1 {
+		t.Error("Expected 1, got ", id.GetId())
 	}
 
 	if task.GetDescription() != "Test Description" {
