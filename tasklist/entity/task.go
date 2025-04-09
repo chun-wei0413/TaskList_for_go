@@ -15,7 +15,7 @@ func NewTask(id TaskId, description string, done bool) *Task {
 	}
 }
 
-func (task *Task) GetTaskId() TaskId {
+func (task *Task) GetId() TaskId {
 	return task.id
 }
 

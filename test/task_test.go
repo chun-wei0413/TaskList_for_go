@@ -8,7 +8,7 @@ import (
 func TestTask(t *testing.T) {
 	task := entity.NewTask(*entity.NewTaskId(1), "Test Description", false)
 
-	id := task.GetTaskId()
+	id := task.GetId()
 	if id.GetId() != 1 {
 		t.Error("Expected 1, got ", id.GetId())
 	}

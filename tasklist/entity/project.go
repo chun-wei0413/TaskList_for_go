@@ -27,3 +27,27 @@ func (p *Project) GetName() *ProjectName {
 func (p *Project) GetTasks() []Task {
 	return p.tasks
 }
+
+func (p *Project) ContainTask(taskId TaskId) bool {
+	for _, task := range p.tasks {
+		id := task.GetId()
+		if id.GetId() == taskId.GetId() {
+			return true
+		}
+	}
+	return false
+}
+
+func (p *Project) SetTaskDone(taskId TaskId, done bool) {
+	for i, task := range p.tasks {
+		id := task.GetId()
+		if id.GetId() == taskId.GetId() {
+			p.tasks[i].SetDone(done)
+			return
+		}
+	}
+}
+
+func (p *Project) AddTask(task Task) {
+	p.tasks = append(p.tasks, task)
+}
